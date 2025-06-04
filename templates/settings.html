@@ -1,0 +1,441 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'settings.css' %}">
+    <style>
+        .settings-block {
+            background: #24113e;
+            border-radius: 18px;
+            padding: 23px 30px 18px 30px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 24px #0002;
+            max-width: 420px;
+        }
+
+        .settings-block h3 {
+            margin-bottom: 16px;
+            color: #9effd0;
+            font-size: 1.22em;
+        }
+
+        .advance-mode-options {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .advance-radio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 1.08em;
+            color: #fff;
+            font-weight: 500;
+            padding: 4px 7px 4px 0;
+            border-radius: 7px;
+            transition: background 0.18s;
+        }
+
+        .advance-radio input[type="radio"] {
+            accent-color: #AA2C86;
+            width: 18px;
+            height: 18px;
+            margin-right: 3px;
+        }
+
+        .advance-radio input[type="radio"]:focus+span {
+            outline: 2px solid #AA2C86;
+        }
+
+        .advance-radio.selected {
+            background: #3a166c;
+        }
+
+        .settings-info {
+            font-size: 0.98em;
+            color: #b8b8b8;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
+
+        .form-success,
+        .settings-success {
+            color: #2ecc40;
+            font-size: 1.01em;
+            margin-top: 7px;
+            transition: opacity 0.2s;
+            opacity: 1;
+        }
+
+        .settings-success.hide {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="/" class="nav-btn home-link" title="Home">
+                <span class="nav-icon">
+                    <!-- Home SVG -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M3 11L12 3L21 11V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V11Z"
+                            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 22V12H15V22" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-text">Home</span>
+            </a>
+            <span class="score-badge" title="Your score">
+                <span class="score-icon">
+                    <!-- Star SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 17L5.87868 20.7639C5.31946 21.0861 4.68426 20.6138 4.80902 19.9871L6.26439 12.5592L1.23607 7.23607C0.799035 6.80812 1.02362 6.04806 1.64195 5.97331L9.12202 5.0918L12 0.5L14.878 5.0918L22.3581 5.97331C22.9764 6.04806 23.201 6.80812 22.7639 7.23607L17.7356 12.5592L19.191 19.9871C19.3157 20.6138 18.6805 21.0861 18.1213 20.7639L12 17Z"
+                            stroke="#9effd0" stroke-width="1.5" fill="none" />
+                    </svg>
+                </span>
+                <span class="score-num">{{ user.score }}</span>
+            </span>
+            <a href="#" class="nav-btn reyting-link" id="open-reyting-modal">
+                <span class="nav-icon">
+                    <!-- Trophy SVG -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17v2a3 3 0 003 3h4a3 3 0 003-3v-2" stroke="#ffd700" stroke-width="2" fill="none" />
+                        <path d="M4 6V4a1 1 0 011-1h14a1 1 0 011 1v2a5 5 0 01-5 5H9A5 5 0 014 6z" stroke="#ffd700"
+                            stroke-width="2" fill="none" />
+                        <circle cx="12" cy="13" r="2" stroke="#ffd700" stroke-width="2" fill="none" />
+                    </svg>
+                </span>
+                <span class="nav-text">Top Ranking</span>
+            </a>
+            <a href="#" id="profile-btn" class="nav-btn kabinet-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="2" />
+                    <path d="M2 21C2 17.134 6.477 14 12 14C17.523 14 22 17.134 22 21" stroke="#fff" stroke-width="2" />
+                </svg>
+                <span class="nav-text">Profile</span>
+            </a>
+
+        </nav>
+    </header>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <svg width="70" height="70" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="6" stroke="#9effd0" stroke-width="2" />
+                    <path d="M3 21c0-4 4.477-7 9-7s9 3 9 7" stroke="#be4b99" stroke-width="2" />
+                </svg>
+            </div>
+            <div class="profile-info-table">
+                <div class="profile-info-row">
+                    <span class="profile-label">Username</span>
+                    <span id="profile-username" class="profile-value"></span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-label">Email</span>
+                    <span id="profile-email" class="profile-value"></span>
+                    <button id="edit-email-btn" class="edit-btn" title="Change Email">✏️</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <!-- QUESTION ADVANCE SETTINGS BLOCK -->
+            <div class="settings-block">
+                <h3>Question Advance Mode</h3>
+                <div class="advance-mode-options">
+                    <label class="advance-radio" id="radio-next-label">
+                        <input type="radio" name="advance-mode" value="next" id="advance-mode-next" />
+                        <span>Next Button</span>
+                    </label>
+                    <label class="advance-radio" id="radio-auto-label">
+                        <input type="radio" name="advance-mode" value="auto" id="advance-mode-auto" />
+                        <span>Auto</span>
+                    </label>
+                </div>
+                <div class="settings-info">
+                    <b>Next Button:</b> Click "Next" after each answer.<br>
+                    <b>Auto:</b> The next question appears automatically after answering.
+                </div>
+                <div id="settings-success" class="settings-success" style="display:none;">Saved!</div>
+            </div>
+            <!-- EMAIL CHANGE MODAL -->
+            <div id="email-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-email-modal">&times;</span>
+                    <h3>Change Email</h3>
+                    <input type="email" id="new-email-input" placeholder="New email" autocomplete="email">
+                    <button id="save-email-btn" class="btn-main">Save</button>
+                    <div id="email-error" class="form-error"></div>
+                </div>
+            </div>
+
+            <!-- PASSWORD CHANGE BLOCK -->
+            <div class="password-change-block">
+                <h3>Change Password</h3>
+                <input type="password" id="old-password-input" placeholder="Old password"
+                    autocomplete="current-password">
+                <input type="password" id="new-password-input" placeholder="New password" autocomplete="new-password">
+                <input type="password" id="confirm-password-input" placeholder="Confirm new password"
+                    autocomplete="new-password">
+                <button id="change-password-btn" class="btn-main">Change Password</button>
+                <div id="password-error" class="form-error"></div>
+                <div id="password-success" class="form-success"></div>
+            </div>
+        </div>
+    </div>
+    <div id="reyting-modal" class="modal-overlay" style="display:none">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span>Top Ranking</span>
+                <button class="close-modal-btn" id="close-reyting-modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body" id="reyting-content">
+                <!-- Ranking results will be loaded here via AJAX -->
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+    <div id="profile-dropdown" class="profile-dropdown">
+        <div class="profile-content">
+            <!-- User Score -->
+            <div class="score-section">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 17L5.87868 20.7639C5.31946 21.0861 4.68426 20.6138 4.80902 19.9871L6.26439 12.5592L1.23607 7.23607C0.799035 6.80812 1.02362 6.04806 1.64195 5.97331L9.12202 5.0918L12 0.5L14.878 5.0918L22.3581 5.97331C22.9764 6.04806 23.201 6.80812 22.7639 7.23607L17.7356 12.5592L19.191 19.9871C19.3157 20.6138 18.6805 21.0861 18.1213 20.7639L12 17Z"
+                        stroke="#9effd0" stroke-width="1.5" fill="none" />
+                </svg>
+                <span class="score-num">{{ user.score }}</span>
+            </div>
+            <hr />
+            <!-- Menu items -->
+            <a href="/kabinet/" class="dropdown-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="2" />
+                    <path d="M2 21C2 17.134 6.477 14 12 14C17.523 14 22 17.134 22 21" stroke="#fff" stroke-width="2" />
+                </svg>
+                <span>Profile</span>
+            </a>
+            <a href="{% url 'accounts:settings' %}" class="dropdown-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="2" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06A1.65 1.65 0 0015 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 008.6 15a1.65 1.65 0 00-1.82-.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0015 8.6c.26 0 .52.05.76.14l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 15z"
+                        stroke="#fff" stroke-width="2" />
+                </svg>
+                <span>Settings</span>
+            </a>
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M16 17l5-5-5-5" stroke="#AA2C86" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M21 12H9" stroke="#AA2C86" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M12 19v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5a2 2 0 012 2v2" stroke="#AA2C86"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Load user info
+        fetch('/auth/api/profile/')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('profile-username').textContent = data.username || "";
+                document.getElementById('profile-email').textContent = data.email || "";
+            });
+
+        // --- Email change modal logic ---
+        const emailModal = document.getElementById('email-modal');
+        document.getElementById('edit-email-btn').onclick = function () {
+            emailModal.style.display = 'block';
+            document.getElementById('new-email-input').value = document.getElementById('profile-email').textContent;
+            document.getElementById('email-error').textContent = '';
+        }
+        document.getElementById('close-email-modal').onclick = function () {
+            emailModal.style.display = 'none';
+        }
+        document.getElementById('save-email-btn').onclick = function () {
+            const newEmail = document.getElementById('new-email-input').value.trim();
+            fetch('/auth/api/profile/change_email/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+                body: JSON.stringify({ email: newEmail })
+            })
+                .then(r => r.json().then(d => [r.status, d]))
+                .then(([status, data]) => {
+                    if (status === 200 && data.success) {
+                        document.getElementById('profile-email').textContent = data.email;
+                        emailModal.style.display = 'none';
+                    } else {
+                        document.getElementById('email-error').textContent = data.error || "Error";
+                    }
+                });
+        }
+
+        // --- Password change logic ---
+        document.getElementById('change-password-btn').onclick = function () {
+            const oldPass = document.getElementById('old-password-input').value;
+            const newPass = document.getElementById('new-password-input').value;
+            const confirmPass = document.getElementById('confirm-password-input').value;
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('password-success').textContent = '';
+
+            if (!oldPass || !newPass || !confirmPass) {
+                document.getElementById('password-error').textContent = 'All fields are required.';
+                return;
+            }
+            if (newPass !== confirmPass) {
+                document.getElementById('password-error').textContent = 'New password and confirm password do not match.';
+                return;
+            }
+            fetch('/auth/api/profile/change_password/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+                body: JSON.stringify({ old_password: oldPass, new_password: newPass, confirm_password: confirmPass })
+            })
+                .then(r => r.json().then(d => [r.status, d]))
+                .then(([status, data]) => {
+                    if (status === 200 && data.success) {
+                        document.getElementById('old-password-input').value = "";
+                        document.getElementById('new-password-input').value = "";
+                        document.getElementById('confirm-password-input').value = "";
+                        document.getElementById('password-success').textContent = "Password changed successfully!";
+                    } else {
+                        document.getElementById('password-error').textContent = data.error || "Error";
+                    }
+                });
+        }
+
+        // --- SETTINGS: Question Advance Mode ---
+        // Default: "next"
+        function getAdvanceMode() {
+            return localStorage.getItem('questionAdvance') || "next";
+        }
+        function setAdvanceMode(mode) {
+            localStorage.setItem('questionAdvance', mode);
+        }
+        // On page load: set checked and style
+        function setAdvanceModeRadio() {
+            const mode = getAdvanceMode();
+            const nextRadio = document.getElementById('advance-mode-next');
+            const autoRadio = document.getElementById('advance-mode-auto');
+            const labelNext = document.getElementById('radio-next-label');
+            const labelAuto = document.getElementById('radio-auto-label');
+            nextRadio.checked = (mode === "next");
+            autoRadio.checked = (mode === "auto");
+            // Styling for selected
+            labelNext.classList.toggle("selected", nextRadio.checked);
+            labelAuto.classList.toggle("selected", autoRadio.checked);
+        }
+        setAdvanceModeRadio();
+
+        // On change
+        document.querySelectorAll('input[name="advance-mode"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                setAdvanceMode(this.value);
+                setAdvanceModeRadio();
+                // Feedback
+                const msg = document.getElementById('settings-success');
+                msg.style.display = "";
+                msg.classList.remove('hide');
+                setTimeout(() => { msg.classList.add('hide'); }, 1200);
+                setTimeout(() => { msg.style.display = "none"; msg.classList.remove('hide'); }, 1600);
+            });
+        });
+
+        // Simple getCookie function for CSRF
+        function getCookie(name) {
+            const v = `; ${document.cookie}`;
+            const p = v.split(`; ${name}=`);
+            if (p.length === 2) return p.pop().split(';').shift();
+        }
+        window.onclick = function (event) {
+            if (event.target == emailModal) emailModal.style.display = "none";
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openBtn = document.getElementById('open-reyting-modal');
+            const closeBtn = document.getElementById('close-reyting-modal');
+            const modal = document.getElementById('reyting-modal');
+
+            if (openBtn && closeBtn && modal) {
+                openBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                    fetchReyting();
+                });
+
+                closeBtn.addEventListener('click', function () {
+                    modal.style.display = 'none';
+                });
+
+                // Modal tashqarisini bosganda yopiladi
+                window.addEventListener('click', function (event) {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+        function fetchReyting() {
+            const content = document.getElementById('reyting-content');
+            content.innerHTML = '<div class="loading">Loading...</div>';
+            fetch('/api/top-reyting/')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.length) {
+                        content.innerHTML = "<div style='text-align:center;color:#ccc'>No rankings yet</div>";
+                        return;
+                    }
+                    content.innerHTML = `<ul class="reyting-list">` +
+                        data.map((item, idx) => `
+                    <li class="reyting-item">
+                        <span class="reyting-rank">${idx + 1}</span>
+                        <span class="reyting-username">${item.full_name || item.username}</span>
+                        <span class="reyting-score">${item.score}</span>
+                    </li>
+                `).join('') +
+                        `</ul>`;
+                })
+                .catch(() => {
+                    content.innerHTML = "<div class='loading'>Error: failed to load ranking</div>";
+                });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('profile-btn');
+            const dropdown = document.getElementById('profile-dropdown');
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+            });
+
+            document.addEventListener('mousedown', function (e) {
+                if (!dropdown.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

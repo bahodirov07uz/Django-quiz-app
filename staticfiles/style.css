@@ -1,0 +1,579 @@
+/* Asosiy uslublar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    color: #fff;
+    background: #09001d;
+    overflow-x: hidden;
+}
+
+.main {
+    min-height: 100vh;
+    background: url('/Assets/background2.jpg') no-repeat center center/cover;
+    pointer-events: auto;
+    transition: 2s ease;
+}
+
+.main.active {
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: transparent;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    filter: drop-shadow(0 0 5px #09001d);
+}
+
+.navbar a {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: #AA2C86;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 80px; /* header balandligi uchun joy */
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.home-content {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .3);
+}
+
+.home-content p {
+    font-size: 16px;
+    margin: 20px 0 30px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+.home-content .start-btn {
+    width: 190px;
+    height: 55px;
+    background: #AA2C86;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 10px #AA2C86;
+    transition: 0.3s;
+}
+
+.home-content .start-btn:hover {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Modal asosiy uslublari */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #09001d;
+  margin: auto;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  float: right;
+  font-size: 22px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  margin-top: -15px;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Round list style */
+.round-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.round-list li button,
+.round-btn {
+  background-color: #AA2C86;
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+}
+
+.round-list li button:hover,
+.round-btn:hover {
+  background-color: #ba5fa0;
+}
+
+.round-btn {
+  margin-top: 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .home-content h1 {
+        font-size: 36px;
+    }
+    .quiz-section .quiz-box,
+    .quiz-section .result-box,
+    .popup-info {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .percentage-container .circular-progress {
+        width: 180px;
+        height: 180px;
+    }
+
+    .percentage-container .circular-progress::before {
+        width: 150px;
+        height: 150px;
+    }
+
+    .circular-progress .progress-value {
+        font-size: 32px;
+    }
+
+    .result-box h2 {
+        font-size: 36px;
+    }
+
+    .navbar a {
+        margin-left: 20px;
+        font-size: 16px;
+    }
+
+    .header {
+        padding: 15px 5%;
+    }
+}
+
+/* Mobilga moslashish */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .round-list li button,
+  .round-btn {
+    font-size: 14px;
+    padding: 12px 18px;
+  }
+
+  .home-content .start-btn {
+    width: 160px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .home-content h1 {
+    font-size: 28px;
+  }
+
+  .navbar a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 12px 5%;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .user-score {
+    font-size: 14px;
+  }
+}
+
+.header {
+    width: 100%;
+    background: #1a003a;
+    box-shadow: 0 2px 16px #0003;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 18px;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 16px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.10rem;
+    border-radius: 12px;
+    transition: background 0.18s, box-shadow 0.14s, color 0.18s;
+    background: transparent;
+    font-weight: 500;
+    position: relative;
+}
+.nav-btn .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    width: 22px;
+}
+.nav-btn .nav-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-btn:hover, .nav-btn:focus {
+    background: #4e2a84;
+    color: #fff;
+    box-shadow: 0 2px 8px #0002;
+}
+
+.score-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #220042;
+    color: #9effd0;
+    font-weight: 600;
+    font-size: 1.05rem;
+    border-radius: 9px;
+    padding: 7px 13px 7px 10px;
+    margin-left: 18px;
+    min-width: 54px;
+    justify-content: center;
+}
+.score-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+}
+.score-num {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.08em;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        max-width: 100vw;
+        padding: 0 3vw;
+        gap: 4px;
+        min-height: 45px;
+    }
+    .nav-btn {
+        gap: 5px;
+        font-size: 0.97rem;
+        padding: 7px 9px;
+        border-radius: 7px;
+    }
+    .score-badge {
+        padding: 6px 8px 6px 8px;
+        font-size: 0.97rem;
+        margin-left: 7px;
+    }
+}
+/* Mobil — faqat icon (yozuvlar yashiriladi), joylashuv markazda */
+@media (max-width: 480px) {
+    .navbar {
+        gap: 2vw;
+    }
+    .nav-btn .nav-text {
+        display: none;
+    }
+    .nav-btn {
+        padding: 7px 5px;
+        min-width: 36px;
+        justify-content: center;
+    }
+    .score-badge {
+        min-width: 36px;
+        padding: 6px 6px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Reyting modal uchun */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.67);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 5000;
+}
+.modal-box {
+    background: #1a003a;
+    border-radius: 16px;
+    max-width: 360px;
+    width: 94vw;
+    box-shadow: 0 6px 32px #000a;
+    padding: 0 0 18px 0;
+    color: #fff;
+    animation: fadeIn .18s;
+}
+@keyframes fadeIn {from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 18px 8px 18px;
+    border-bottom: 1px solid #332066;
+    font-size: 1.16rem;
+    font-weight: bold;
+}
+.close-modal-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 6px;
+    transition: color 0.15s;
+}
+.close-modal-btn:hover { color: #ffd700; }
+.modal-body {
+    padding: 12px 18px 0 18px;
+    min-height: 120px;
+}
+.reyting-list {
+    list-style: none;
+    margin: 0; padding: 0;
+}
+.reyting-item {
+    display: flex; align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 1.03rem;
+    border-bottom: 1px solid #281059;
+}
+.reyting-item:last-child {border-bottom: none;}
+.reyting-rank {
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #ffd700;
+    min-width: 28px;
+    text-align: right;
+}
+.reyting-username {
+    flex: 1 1 auto;
+    word-break: break-all;
+}
+.reyting-score {
+    color: #9effd0;
+    font-weight: bold;
+    min-width: 54px;
+    text-align: right;
+}
+.loading {
+    text-align: center;
+    color: #ccc;
+    padding: 38px 0 38px 0;
+    font-size: 1.1em;
+}
+@media (max-width: 480px){
+    .modal-box { max-width: 99vw; padding: 0 0 8px 0;}
+    .modal-header, .modal-body { padding-left: 8px; padding-right: 8px;}
+}
+
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3000;
+}
+.modal-box {
+    background: #1a003a;
+    border-radius: 14px;
+    max-width: 360px;
+    width: 94vw;
+    box-shadow: 0 6px 32px #000a;
+    padding: 0 0 18px 0;
+    color: #fff;
+    animation: fadeIn .2s;
+}
+@keyframes fadeIn { from{opacity:0;transform:scale(.94);} to{opacity:1;transform:scale(1);}}
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 18px 8px 18px;
+    border-bottom: 1px solid #332066;
+    font-size: 1.12rem;
+    font-weight: bold;
+}
+.close-modal-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 6px;
+    transition: color 0.15s;
+}
+.close-modal-btn:hover { color: #ffd700; }
+.modal-body { padding: 18px 18px 0 18px; text-align: center; }
+.modal-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 16px;}
+.modal-btn {
+    background: #4e2a84;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    padding: 10px 25px;
+    font-size: 1.05em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.13s;
+}
+.modal-btn:hover { background: #6c3fc7; }
+@media (max-width: 480px){
+    .modal-box { max-width: 99vw; }
+    .modal-header, .modal-body { padding-left: 8px; padding-right: 8px;}
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background: #222836;
+    border-radius: 18px;
+    box-shadow: 0 2px 20px 0 #0006;
+    padding: 24px 20px 20px 20px;
+    width: 320px;
+    z-index: 1000;
+    color: #fff;
+    font-family: inherit;
+}
+
+.profile-content .score-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #9effd0;
+}
+
+.profile-content hr {
+    margin: 12px 0;
+    border: none;
+    border-top: 1px solid #33394d;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 0;
+    font-size: 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.dropdown-item svg {
+    flex-shrink: 0;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: #23293a;
+    border-radius: 8px;
+}
+
+#profile-btn {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #cccccc;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #AA2C86;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #8a246d;
+        }
+
+        .link {
+            margin-top: 20px;
+            color: #aaaaaa;
+        }
+
+        .link a {
+            color: #AA2C86;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create New Account</h1>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'accounts:register' %}">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label for="id_username">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="input-group">
+                <label for="id_email">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="input-group">
+                <label for="id_password1">Password</label>
+                {{ form.password1 }}
+            </div>
+
+            <div class="input-group">
+                <label for="id_password2">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <style>
+            .messages {
+                margin-bottom: 20px;
+            }
+
+            .alert {
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            /* Turli turdagi xabarlar uchun ranglar */
+            .alert-success {
+                background-color: #28a745;
+                color: white;
+            }
+
+            .alert-error,
+            .alert-danger {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .alert-warning {
+                background-color: #ffc107;
+                color: black;
+            }
+
+            .alert-info {
+                background-color: #17a2b8;
+                color: white;
+            }
+        </style>
+        <div class="link">
+            Already have an account? <a href="{% url 'accounts:login' %}">Login</a>
+        </div>
+    </div>
+</body>
+
+</html>

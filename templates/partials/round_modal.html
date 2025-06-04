@@ -1,0 +1,13 @@
+<!-- Round tanlash modali -->
+<div id="roundModal" class="modal">
+  <div class="modal-content">
+    <h2>Round tanlang</h2>
+    <div id="roundList">
+      {% for round in rounds %}
+        <button class="round-btn" onclick="loadTopicsAndQuestions({{ round.id }}, '{{ round.title }}')">
+          {{ round.title }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
